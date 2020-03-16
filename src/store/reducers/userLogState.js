@@ -2,7 +2,7 @@ import { defineState } from "redux-localstore";
 
 const defaultState = "";
 
-const initialState = defineState(defaultState)("userLoggedIn");
+const initialState = defineState(defaultState)("userLogState");
 
 export default function(state = initialState, action = {}) {
   switch (action.type) {
