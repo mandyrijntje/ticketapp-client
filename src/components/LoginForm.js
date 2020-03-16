@@ -3,10 +3,10 @@ import React, { Component } from "react";
 export default class LoginForm extends Component {
   render() {
     return (
-      <div>
-        <p>Log in to post images</p>
-        <form onSubmit={this.props.onSubmit}>
-          <div className="form-group col-6">
+      <div className="mt-5">
+        <p>Log in to get started.</p>
+        <form className="" onSubmit={this.props.onSubmit}>
+          <div className="form-group col-6 ">
             <label className="col-sm-2">Email</label>
             <input
               type="text"
@@ -25,7 +25,7 @@ export default class LoginForm extends Component {
             />
           </div>
 
-          <button type="submit" className="btn btn-dark">
+          <button type="submit" className="btn btn-dark mr-5">
             Login
           </button>
         </form>
