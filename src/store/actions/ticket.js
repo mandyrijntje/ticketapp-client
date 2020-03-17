@@ -22,47 +22,47 @@ export const getTickets = () => (dispatch, getState) => {
   }
 };
 
-function newImage(newImageData) {
+function newTicket(newTicketData) {
   return {
-    type: "NEW_IMAGE",
-    payload: newImageData
+    type: "NEW_TICKET",
+    payload: newTicketData
   };
 }
 
 export const createTicket = data => (dispatch, getState) => {
   const state = getState();
 
-  const { userLoggedIn } = state;
+  const { userLogState } = state;
 
   return request
-    .post(`${baseUrl}/images`)
-    .set("Authorization", `Bearer ${userLoggedIn.jwt}`)
-    .send({ ...data, userId: userLoggedIn.id })
+    .post(`${baseUrl}/tickets`)
+    .set("Authorization", `Bearer ${userLogState.jwt}`)
+    .send({ ...data, userId: userLogState.id })
     .then(response => {
-      const action = newImage(response.body);
+      const action = newTicket(response.body);
       dispatch(action);
     })
     .catch(console.error);
 };
 
-function changeImage(newImage) {
+function changeTicket(newTicket) {
   return {
-    type: "CHANGE_IMAGE",
-    payload: newImage
+    type: "CHANGE_TICKET",
+    payload: newTicket
   };
 }
 
-export function updateImage(id, update) {
+export function updateTicket(id, update) {
   return async function(dispatch, getState) {
     const state = getState();
 
-    const { userLoggedIn } = state;
+    const { userLogState } = state;
     try {
       const response = await request
-        .put(`${baseUrl}/images/${id}`)
-        .set("Authorization", `Bearer ${userLoggedIn.jwt}`)
+        .put(`${baseUrl}/tickets/${id}`)
+        .set("Authorization", `Bearer ${userLogState.jwt}`)
         .send(update);
-      const action = changeImage(response.body);
+      const action = changeTicket(response.body);
 
       dispatch(action);
     } catch (error) {
@@ -71,20 +71,20 @@ export function updateImage(id, update) {
   };
 }
 
-export const uniqueImageDelete = id => ({
-  type: "IMAGE_DELETE_SUCCESS",
+export const uniqueTicketDelete = id => ({
+  type: "TICKET_DELETE_SUCCESS",
   payload: id
 });
 
-export const deleteImage = id => (dispatch, getState) => {
+export const deleteTicket = id => (dispatch, getState) => {
   const state = getState();
 
-  const { userLoggedIn } = state;
+  const { userLogState } = state;
   request
-    .delete(`${baseUrl}/images/${id}`)
-    .set("Authorization", `Bearer ${userLoggedIn.jwt}`)
+    .delete(`${baseUrl}/tickets/${id}`)
+    .set("Authorization", `Bearer ${userLogState.jwt}`)
     .then(response => {
-      dispatch(uniqueImageDelete(id));
+      dispatch(uniqueTicketDelete(id));
     })
     .catch(console.error);
 };
