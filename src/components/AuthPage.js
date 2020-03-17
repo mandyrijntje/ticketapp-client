@@ -6,7 +6,7 @@ import { Link, Redirect } from "react-router-dom";
 
 class AuthPage extends React.Component {
   componentDidMount() {
-    // this.props.getUser();
+    // this.props.getTickets();
   }
   render() {
     if (!this.props.userLogState.jwt) {

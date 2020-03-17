@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 import AuthPage from "./components/AuthPage"
 import SignupFormContainer from "./components/SignupFormContainer"
 import Navbar from "./components/Navbar";
-import PersonalPage from "./components/PersonalPage";
+import PersonalPage from "./components/ProfilePage";
 import "./App.css";
 
 

@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import CreateImageFormContainer from "./CreateImageFormContainer";
-import UserLoggedInImages from "./UserLoggedInImages";
+import ProfileTickets from "./ProfileTickets";
 import { getUser, logout } from "../store/actions/user";
 import { connect } from "react-redux";
 
-class PersonalPage extends Component {
+class ProfilePage extends Component {
   componentDidMount() {
     if (this.props.userLoggedIn.jwt) {
-    this.props.getUser(this.props.userLoggedIn.id);
+    this.props.getUser(this.props.userLogState.id);
   }
 }
 
@@ -37,7 +37,7 @@ class PersonalPage extends Component {
         <CreateImageFormContainer />
         <div className="row">
           {" "}
-          <UserLoggedInImages images={this.props.userImages} />
+          <ProfileTickets tickets={this.props.userTickets} />
         </div>
       </div>
     );
@@ -46,11 +46,11 @@ class PersonalPage extends Component {
 
 function mapStateToProps(state) {
   return {
-    userImages: state.users.uniqueUser.images,
-    userName: state.users.uniqueUser.username,
-    userLoggedIn: state.userLogState
+    userTickets: state.users.uniqueUser.tickets,
+    email: state.users.uniqueUser.email,
+    userLogState: state.userLogState
   };
 }
 const mapDispatchToProps = { getUser, logout };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PersonalPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);
