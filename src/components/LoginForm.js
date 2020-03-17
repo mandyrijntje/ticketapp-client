@@ -18,7 +18,7 @@ export default class LoginForm extends Component {
           <div className="form-group col-6">
             <label className="col-sm-2">Password</label>
             <input
-              type="text"
+              type="password"
               name="password"
               onChange={this.props.onChange}
               value={this.props.values.password}

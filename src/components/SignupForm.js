@@ -7,15 +7,6 @@ export default class SignupForm extends Component {
         <p>Fill in your data to signup</p>
         <form onSubmit={this.props.onSubmit}>
           <div className="form-group col-6">
-            <label className="col-sm-2">Name</label>
-            <input
-              type="text"
-              name="username"
-              onChange={this.props.onChange}
-              value={this.props.values.username}
-            />
-          </div>
-          <div className="form-group col-6">
             <label className="col-sm-2">Email</label>
             <input
               type="text"
@@ -27,7 +18,7 @@ export default class SignupForm extends Component {
           <div className="form-group col-6">
             <label className="col-sm-2">Password</label>
             <input
-              type="text"
+              type="password"
               name="password"
               onChange={this.props.onChange}
               value={this.props.values.password}

@@ -1,16 +1,15 @@
 import React from "react";
 import SignupForm from "./SignupForm";
 import { connect } from "react-redux";
-import { singup } from "../store/actions/user";
+import { signup } from "../store/actions/user";
 
 class SignupFormContainer extends React.Component {
-  state = { email: "", password: "", username: "" };
+  state = { email: "", password: "" };
   onSubmit = event => {
     event.preventDefault();
-    this.props.singup(
+    this.props.signup(
       this.state.email,
       this.state.password,
-      this.state.username,
       this.props.history
     );
   };
@@ -31,4 +30,4 @@ class SignupFormContainer extends React.Component {
     );
   }
 }
-export default connect(null, { singup })(SignupFormContainer);
+export default connect(null, { signup })(SignupFormContainer);
