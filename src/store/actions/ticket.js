@@ -13,7 +13,7 @@ export const getTickets = () => (dispatch, getState) => {
   const { tickets } = state;
   if (!tickets.all.length) {
     request
-      .get(`${baseUrl}/tickets`)
+      .get(`${baseUrl}/ticket`)
       .then(response => {
         const action = allTickets(response.body);
         dispatch(action);
@@ -35,7 +35,7 @@ export const createTicket = data => (dispatch, getState) => {
   const { userLogState } = state;
 
   return request
-    .post(`${baseUrl}/tickets`)
+    .post(`${baseUrl}/ticket`)
     .set("Authorization", `Bearer ${userLogState.jwt}`)
     .send({ ...data, userId: userLogState.id })
     .then(response => {
@@ -59,7 +59,7 @@ export function updateTicket(id, update) {
     const { userLogState } = state;
     try {
       const response = await request
-        .put(`${baseUrl}/tickets/${id}`)
+        .put(`${baseUrl}/ticket/${id}`)
         .set("Authorization", `Bearer ${userLogState.jwt}`)
         .send(update);
       const action = changeTicket(response.body);
@@ -81,7 +81,7 @@ export const deleteTicket = id => (dispatch, getState) => {
 
   const { userLogState } = state;
   request
-    .delete(`${baseUrl}/tickets/${id}`)
+    .delete(`${baseUrl}/ticket/${id}`)
     .set("Authorization", `Bearer ${userLogState.jwt}`)
     .then(response => {
       dispatch(uniqueTicketDelete(id));

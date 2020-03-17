@@ -29,7 +29,7 @@ function createUser(email) {
   
   export const signup = (email, password, history) => dispatch => {
     request
-      .post(`${baseUrl}/user`)
+      .post(`${baseUrl}/users`)
       .send({ email: email, password: password })
       .then(response => {
         const action = createUser(response.body);
@@ -40,7 +40,9 @@ function createUser(email) {
   };
 
   function singleUser(uniqueUser) {
+    console.log('action passed')
     return {
+      
       type: "UNIQUE_USER",
       payload: uniqueUser
     };
@@ -49,19 +51,20 @@ function createUser(email) {
   export const getUser = userParamId => (dispatch, getState) => {
     if (!userParamId) {
       const state = getState();
-      userParamId = state.userLoggedIn.id;
+      userParamId = state.userLogState.id;
     }
-  
+    console.log('action started')
     return request
-      .get(`${baseUrl}/user/${userParamId}`)
+      .get(`${baseUrl}/users/${userParamId}`)
       .then(response => {
         const body = response.body;
   
         const uniqueUser = {
           id: body.id,
-          username: body.username,
-          images: body.images
+          email: body.email,
+          tickets: body.tickets
         };
+        console.log(uniqueUser)
         const action = singleUser(uniqueUser);
         dispatch(action);
       })

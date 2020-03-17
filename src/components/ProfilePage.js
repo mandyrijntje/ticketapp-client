@@ -6,10 +6,11 @@ import { connect } from "react-redux";
 
 class ProfilePage extends Component {
   componentDidMount() {
-    if (this.props.userLoggedIn.jwt) {
-    this.props.getUser(this.props.userLogState.id);
+    console.log("WHat");
+    if (this.props.userLogState.jwt) {
+      this.props.getUser(this.props.userLogState.id);
+    }
   }
-}
 
   onLogout = () => {
     this.props.logout();
@@ -45,6 +46,8 @@ class ProfilePage extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state);
+
   return {
     userTickets: state.users.uniqueUser.tickets,
     email: state.users.uniqueUser.email,

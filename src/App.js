@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 import AuthPage from "./components/AuthPage"
 import SignupFormContainer from "./components/SignupFormContainer"
 import Navbar from "./components/Navbar";
-import PersonalPage from "./components/ProfilePage";
+import ProfilePage from "./components/ProfilePage";
 import "./App.css";
 
 
@@ -14,7 +14,7 @@ function App() {
       <Navbar />
       <Route exact path="/login" component={AuthPage} />
       <Route exact path="/signup" component={SignupFormContainer} />
-      <Route exact path="/profile" component={PersonalPage}/>
+      <Route exact path="/profile" component={ProfilePage}/>
     </div>
   );
 }
