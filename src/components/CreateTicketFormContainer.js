@@ -6,9 +6,11 @@ import { getUser } from "../store/actions/user";
 
 class CreateTicketFormContainer extends React.Component {
   state = {
-    title: "",
-    url: ""
+    picture: "",
+    price: "",
+    description:""
   };
+
   onChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -18,8 +20,9 @@ class CreateTicketFormContainer extends React.Component {
     event.preventDefault();
     this.props.createTicket(this.state).then(() => this.props.getUser());
     this.setState({
-      title: "",
-      url: ""
+      picture: "",
+    price: "",
+    description:""
     });
   };
   render() {

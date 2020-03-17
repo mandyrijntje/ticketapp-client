@@ -9,14 +9,14 @@ function logUserIn(loginData) {
   };
 }
 
-export const login = (email, password) => dispatch => {
+export const login = (email, password, history) => dispatch => {
   request
     .post(`${baseUrl}/login`)
     .send({ email: email, password: password })
     .then(response => {
       const action = logUserIn(response.body);
       dispatch(action);
-    })
+    }).then(() => history.push("/profile"))
     .catch(console.error);
 };
 
