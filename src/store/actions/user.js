@@ -68,5 +68,10 @@ function createUser(email) {
       .catch(console.error);
   };
 
- 
+  export function logout() {
+    return {
+      type: "LOG_OUT",
+      payload: ""
+    };
+  }
   
