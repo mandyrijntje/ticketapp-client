@@ -1,36 +1,36 @@
 import React, { Component } from "react";
 import EditTicketFormContainer from "./EditTicketFormContainer";
-import ImageCard from "./ImageCard";
+import TicketCard from "./TicketCard";
 
 class ProfileTickets extends Component {
   state = {
-    imagesInEdit: []
+    ticketsInEdit: []
   };
 
-  toggleForm = image => {
-    const newState = this.state.imagesInEdit.includes(image.id)
-      ? this.state.imagesInEdit.filter(id => id !== image.id)
-      : this.state.imagesInEdit.concat(image.id);
+  toggleForm = ticket => {
+    const newState = this.state.ticketsInEdit.includes(ticket.id)
+      ? this.state.ticketsInEdit.filter(id => id !== ticket.id)
+      : this.state.ticketsInEdit.concat(ticket.id);
 
     this.setState({ imagesInEdit: newState });
   };
 
   render() {
-    return this.props.images.map(image => {
-      const showForm = this.state.imagesInEdit.includes(image.id);
+    return this.props.tickets.map(ticket => {
+      const showForm = this.state.ticketsInEdit.includes(ticket.id);
 
       return (
-        <div key={image.id}>
-          <ImageCard image={image} />
+        <div key={ticket.id}>
+          <TicketCard ticket={ticket} />
          <div>
            <button
             className="btn btn-dark"
-            onClick={() => this.toggleForm(image)}
+            onClick={() => this.toggleForm(ticket)}
           >
             Edit mode
           </button>
           
-          {showForm && <EditTicketFormContainer id={image.id} />}
+          {showForm && <EditTicketFormContainer id={ticket.id} />}
         </div>
           </div>
       );
