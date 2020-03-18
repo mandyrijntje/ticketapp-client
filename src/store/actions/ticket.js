@@ -30,6 +30,7 @@ function newTicket(newTicketData) {
 }
 
 export const createTicket = data => (dispatch, getState) => {
+    console.log(data)
   const state = getState();
 
   const { userLogState } = state;
