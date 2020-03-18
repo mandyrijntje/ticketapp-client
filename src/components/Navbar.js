@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { logout } from "../store/actions/user";
 
 class Navbar extends Component {
+  onLogout = () => {
+    this.props.logout();
+    this.props.history.push("/");
+  };
   render() {
     if(!this.props.userLogState.jwt) {
     return (
@@ -93,7 +98,7 @@ class Navbar extends Component {
               </Link>
             </li>
             <li className="nav-item mx-5">
-              <Link to="/logout" className="nav-link">
+              <Link to="/logout" onClick={this.onLogout} className="nav-link">
                 Logout
               </Link>
             </li>
@@ -106,5 +111,5 @@ class Navbar extends Component {
 function mapStateToProps(state) {
   return { userLogState: state.userLogState };
 }
-const mapDispatchToProps = {  };
+const mapDispatchToProps = { logout };
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

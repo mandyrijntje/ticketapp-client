@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import CreateTicketFormContainer from "./CreateTicketFormContainer";
 import ProfileTickets from "./ProfileTickets";
-import { getUser, logout } from "../store/actions/user";
+import { getUser } from "../store/actions/user";
 import { connect } from "react-redux";
 
 class ProfilePage extends Component {
@@ -12,10 +12,6 @@ class ProfilePage extends Component {
     }
   }
 
-  onLogout = () => {
-    this.props.logout();
-    this.props.history.push("/");
-  };
   render() {
     if (!this.props.userLogState.jwt) {
       return <p>Login to access your imageboard</p>;
@@ -32,9 +28,6 @@ class ProfilePage extends Component {
     return (
       <div>
         <p>Welcome {this.props.email}</p>
-        <button className="btn btn-dark" onClick={this.onLogout}>
-          Logout
-        </button>
         <CreateTicketFormContainer />
         <div className="row">
           {" "}
@@ -54,6 +47,6 @@ function mapStateToProps(state) {
     userLogState: state.userLogState
   };
 }
-const mapDispatchToProps = { getUser, logout };
+const mapDispatchToProps = { getUser };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

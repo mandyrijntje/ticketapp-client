@@ -3,7 +3,9 @@ import { Route } from "react-router-dom";
 import UserPage from "./components/UserPage";
 import AuthPage from "./components/AuthPage"
 import SignupFormContainer from "./components/SignupFormContainer"
+import AllUsersContainer from "./components/AllUsersContainer"
 import Navbar from "./components/Navbar";
+import Homepage from "./components/Homepage";
 import ProfilePage from "./components/ProfilePage";
 import "./App.css";
 
@@ -15,7 +17,9 @@ function App() {
       <Route exact path="/login" component={AuthPage} />
       <Route exact path="/signup" component={SignupFormContainer} />
       <Route exact path="/profile" component={ProfilePage}/>
-      <Route exact path="/user/:userId" component={UserPage} />
+      <Route exact path="/users" component={AllUsersContainer} />
+      <Route exact path="/users/:userId" component={UserPage} />
+      <Route exact path="/" component={Homepage} />
     </div>
   );
 }

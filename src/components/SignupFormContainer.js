@@ -4,14 +4,17 @@ import { connect } from "react-redux";
 import { signup, getUser } from "../store/actions/user";
 
 class SignupFormContainer extends React.Component {
+
   state = { email: "", password: "" };
+
   onSubmit = event => {
     event.preventDefault();
     this.props.signup(
       this.state.email,
       this.state.password,
       this.props.history
-    ).then(() => this.props.getUser());
+    )
+this.props.getUser();
   };
   onChange = event => {
     this.setState({
@@ -30,4 +33,4 @@ class SignupFormContainer extends React.Component {
     );
   }
 }
-export default connect(null, { signup })(SignupFormContainer);
+export default connect(null, { signup, getUser })(SignupFormContainer);

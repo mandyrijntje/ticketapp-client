@@ -1,0 +1,14 @@
+body {
+    margin: 40px;
+    font-family: "Spartan";
+  }
+  
+  img {
+    max-width: 350px;
+    padding: 20px;
+  }
+  
+  .btn {
+    margin: 5px;
+  }
+  
