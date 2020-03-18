@@ -3,11 +3,16 @@ import TicketCard from "./TicketCard";
 
 class AllTickets extends Component {
   render() {
+    console.log(`my props in alltickets`, this.props);
     return this.props.tickets.map(ticket => {
+      const ticketAuthorId = ticket.userId;
+        const ticketAuthor = this.props.users.find(
+          user => user.id === ticketAuthorId
+        );
       return (
         <div key={ticket.id}>
           <TicketCard
-            users={this.props.users.find(user => user.id === ticket.userId)}
+            user={ticketAuthor}
             ticket={ticket}
           />
         </div>

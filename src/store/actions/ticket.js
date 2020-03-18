@@ -15,7 +15,7 @@ export const getTickets = () => (dispatch, getState) => {
     request
       .get(`${baseUrl}/ticket`)
       .then(response => {
-        const action = allTickets(response.body);
+        const action = allTickets(response.body.tickets);
         dispatch(action);
       })
       .catch(console.error);

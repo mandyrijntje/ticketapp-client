@@ -18,7 +18,7 @@ class AllEvents extends Component {
   //   console.log(`kuxrx`, this.props.users.all);
   // }
   render() {
-   
+    // console.log(`my props in allevents`, this.props);
     if (this.state.load === false) {
       return this.props.events.map(event => {
         const eventAuthorId = event.userId;
