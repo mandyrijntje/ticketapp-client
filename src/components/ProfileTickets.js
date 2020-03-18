@@ -12,7 +12,7 @@ class ProfileTickets extends Component {
       ? this.state.ticketsInEdit.filter(id => id !== ticket.id)
       : this.state.ticketsInEdit.concat(ticket.id);
 
-    this.setState({ imagesInEdit: newState });
+    this.setState({ ticketsInEdit: newState });
   };
 
   render() {

@@ -9,7 +9,7 @@ export default class TicketCard extends Component {
 
     const ticketAuthorId = this.props.ticket.userId
     const ticketAuthor = this.props.users.find(user=>user.id===ticketAuthorId)
-    const ticketAuthorName = ticketAuthor.name
+    const ticketAuthorName = ticketAuthor.email
 
     return (
       <div className="col-lg-4 col-md-6 col-12" key={this.props.ticket.id}>

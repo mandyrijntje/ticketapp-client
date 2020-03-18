@@ -10,8 +10,8 @@ function allEvents(eventData) {
 }
 export const getEvents = () => (dispatch, getState) => {
   const state = getState();
-  const { events } = state;
-  if (!events.all.length) {
+  const { event } = state;
+  if (!event.all.length) {
     request
       .get(`${baseUrl}/event`)
       .then(response => {

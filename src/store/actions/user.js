@@ -62,7 +62,8 @@ function createUser(email) {
         const uniqueUser = {
           id: body.id,
           email: body.email,
-          tickets: body.tickets
+          tickets: body.tickets,
+          events: body.events
         };
         console.log(uniqueUser)
         const action = singleUser(uniqueUser);

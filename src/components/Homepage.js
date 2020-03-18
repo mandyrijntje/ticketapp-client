@@ -19,7 +19,7 @@ class Homepage extends React.Component {
   }
 }
 function mapStateToProps(state) {
-  return { events: state.events.all };
+  return { events: state.event.all };
 }
 const mapDispatchToProps = { getEvents };
 export default connect(mapStateToProps, mapDispatchToProps)(Homepage);
