@@ -10,8 +10,8 @@ function allTickets(ticketData) {
 }
 export const getTickets = () => (dispatch, getState) => {
   const state = getState();
-  const { tickets } = state;
-  if (!tickets.all.length) {
+  const { ticket } = state;
+  if (!ticket.all.length) {
     request
       .get(`${baseUrl}/ticket`)
       .then(response => {

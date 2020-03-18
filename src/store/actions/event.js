@@ -15,7 +15,8 @@ export const getEvents = () => (dispatch, getState) => {
     request
       .get(`${baseUrl}/event`)
       .then(response => {
-        const action = allEvents(response.body);
+        const action = allEvents(response.body.events);
+        console.log(`response`, response);
         dispatch(action);
       })
       .catch(console.error);
