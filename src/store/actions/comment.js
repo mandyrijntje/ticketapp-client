@@ -25,13 +25,13 @@ export const getComments = ticketParamId => (dispatch, getState) => {
   }
 };
 
-// export function postComment(comment, email, ticketId) {
-//     return {
-//       type: "POST_COMMENT",
-//       payload: {
-//         email: email,
-//         comment: comment,
-//         ticketId: ticketId
-//       }
-//     };
-//   }
+export function postComment(comment, email, ticketId) {
+    return {
+      type: "POST_COMMENT",
+      payload: {
+        email: email,
+        comment: comment,
+        ticketId: ticketId
+      }
+    };
+  }

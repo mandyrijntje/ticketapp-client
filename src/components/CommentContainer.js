@@ -51,7 +51,6 @@ class CommentContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    comments: state.comment.all,
     tickets: state.ticket.all,
     users: state.users.all
   };
