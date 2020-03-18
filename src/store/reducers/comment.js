@@ -1,21 +1,27 @@
 const initialState = {
-    productReviews: []
-  };
-  
-  export default function reviewsReducer(state = initialState, action) {
-    switch (action.type) {
-      case "STORE_REVIEW": {
-        return {
-          ...state,
-          productReviews: state.productReviews.concat({
-            customerName: action.payload.customerName,
-            review: action.payload.review,
-            productId: action.payload.productId
-          })
-        };
-      }
-      default: {
-        return state;
-      }
+  all: []
+};
+
+export default function reviewsReducer(state = initialState, action) {
+  switch (action.type) {
+    case "ALL_COMMENTS": {
+      return {
+        ...state,
+        all: action.payload
+      };
+    }
+    case "POST_COMMENT": {
+      return {
+        ...state,
+        all: state.all.concat({
+          email: action.payload.email,
+          comment: action.payload.comment,
+          ticketId: action.payload.ticketId
+        })
+      };
+    }
+    default: {
+      return state;
     }
   }
+}

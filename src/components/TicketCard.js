@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CommentContainer from "./CommentContainer"
 
+
 export default class TicketCard extends Component {
   render() {
     const now = new Date();
@@ -27,3 +28,4 @@ export default class TicketCard extends Component {
     );
   }
 }
+
