@@ -1,7 +1,7 @@
 import React from "react";
 import SignupForm from "./SignupForm";
 import { connect } from "react-redux";
-import { signup } from "../store/actions/user";
+import { signup, getUser } from "../store/actions/user";
 
 class SignupFormContainer extends React.Component {
   state = { email: "", password: "" };
@@ -11,7 +11,7 @@ class SignupFormContainer extends React.Component {
       this.state.email,
       this.state.password,
       this.props.history
-    );
+    ).then(() => this.props.getUser());
   };
   onChange = event => {
     this.setState({
