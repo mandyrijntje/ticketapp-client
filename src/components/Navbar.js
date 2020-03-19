@@ -6,7 +6,6 @@ import { logout } from "../store/actions/user";
 class Navbar extends Component {
   onLogout = () => {
     this.props.logout();
-    this.props.history.push("/");
   };
   render() {
     if(!this.props.userLogState.jwt) {
@@ -98,7 +97,7 @@ class Navbar extends Component {
               </Link>
             </li>
             <li className="nav-item mx-5">
-              <Link to="/logout" onClick={this.onLogout} className="nav-link">
+              <Link to="/" onClick={this.onLogout} className="nav-link">
                 Logout
               </Link>
             </li>

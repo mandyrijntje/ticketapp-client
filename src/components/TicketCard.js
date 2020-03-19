@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import CommentContainer from "./CommentContainer"
-
+import CommentContainer from "./CommentContainer";
 
 export default class TicketCard extends Component {
+
   render() {
     const now = new Date();
     const updated = new Date(this.props.ticket.updatedAt);
@@ -21,11 +21,10 @@ export default class TicketCard extends Component {
         <p className="text-center"> {this.props.ticket.description} € </p>
         <p> Uploaded {Math.round(hours)} hours ago</p>
         <div>
-        <h3 className="text-center"> Comments</h3>
-        <CommentContainer/>
+          <h3 className="text-center"> Comments</h3>
+          <CommentContainer />
         </div>
       </div>
     );
   }
 }
-

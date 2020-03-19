@@ -8,13 +8,10 @@ function allComments(commentData) {
     payload: commentData
   };
 }
-export const getComments = ticketParamId => (dispatch, getState) => {
+export const getComments = () => (dispatch, getState) => {
     const state = getState();
-  if (!ticketParamId) {
-    ticketParamId = state.ticket.id;
-  }
- 
-  if (!state.comment.all.length) {
+    const ticketParamId = state.ticket.id;
+ if (!state.comment.all.length) {
     request
       .get(`${baseUrl}/ticket/${ticketParamId}/comment`)
       .then(response => {

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getComments } from "../store/actions/comment";
+import { getUsers } from "../store/actions/users";
 import CommentCard from "./CommentCard";
 import CommentForm from "./CommentForm";
 
@@ -8,13 +9,14 @@ class CommentContainer extends Component {
   state = {
     load: true
   };
-
-  async componentDidMount() {
-    await getComments();
+  async componentWillMount() {
+    await this.props.getComments();
+    await this.props.getUsers();
     this.setState({ load: false });
   }
 
   render() {
+    console.log(`params in comment`, this.props.match.params);
     const ticketIdMatch = parseInt(this.props.match.params.id);
     const ticketMatch = this.props.tickets.find(
       ticket => ticket.id === ticketIdMatch
@@ -23,27 +25,30 @@ class CommentContainer extends Component {
     const filteredComments = this.props.comments.filter(
       comment => comment.ticketId === ticketIdMatch
     );
-    // console.log(`my props in allevents`, this.props);
     if (this.state.load === false && ticketMatch) {
-      return this.props.comments.map(comment => {
-        const commentAuthorId = comment.userId;
-        console.log(`hello`, this.props.users);
-        const commentAuthor = this.props.users.find(
-          user => user.id === commentAuthorId
-        );
-        return (
-          <div key={comment.id}>
-            <h1>Comments</h1>
-            {filteredComments.length === 0
-              ? "No comments yet. Be the first.yy"
-              : filteredComments.map(comment => {
-                  return <CommentCard user={commentAuthor} comment={comment} />;
-                })}
+      return (
+        <div>
+          <h1>Comments</h1>
+          {filteredComments.length === 0
+            ? "No comments yet. Be the first.yy"
+            : filteredComments.map(comment => {
+                const commentAuthorId = comment.userId;
+                const commentAuthor = this.props.users.find(
+                  user => user.id === commentAuthorId
+                );
 
-            <CommentForm ticketId={ticketIdMatch} />
-          </div>
-        );
-      });
+                return (
+                  <CommentCard
+                    key={comment.id}
+                    user={commentAuthor}
+                    comment={comment}
+                  />
+                );
+              })}
+
+          <CommentForm ticketId={ticketIdMatch} />
+        </div>
+      );
     }
     return <p>Loading...</p>;
   }
@@ -55,6 +60,6 @@ function mapStateToProps(state) {
     users: state.users.all
   };
 }
-const mapDispatchToProps = {};
+const mapDispatchToProps = { getComments, getUsers };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentContainer);
