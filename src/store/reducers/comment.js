@@ -2,7 +2,7 @@ const initialState = {
   all: []
 };
 
-export default function reviewsReducer(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case "ALL_COMMENTS": {
       return {

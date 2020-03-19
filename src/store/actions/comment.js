@@ -8,10 +8,9 @@ function allComments(commentData) {
     payload: commentData
   };
 }
-export const getComments = () => (dispatch, getState) => {
-    const state = getState();
-    const ticketParamId = state.ticket.id;
- if (!state.comment.all.length) {
+export const getCommentsForTicket = ticketParamId => (dispatch, getState) => {
+  const state = getState();
+  if (!state.comment.all.length) {
     request
       .get(`${baseUrl}/ticket/${ticketParamId}/comment`)
       .then(response => {
@@ -22,13 +21,9 @@ export const getComments = () => (dispatch, getState) => {
   }
 };
 
-export function postComment(comment, email, ticketId) {
-    return {
-      type: "POST_COMMENT",
-      payload: {
-        email: email,
-        comment: comment,
-        ticketId: ticketId
-      }
-    };
-  }
+export function postComment(commentData) {
+  return {
+    type: "POST_COMMENT",
+    payload: commentData
+  };
+}

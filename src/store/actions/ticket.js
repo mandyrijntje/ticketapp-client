@@ -22,6 +22,40 @@ export const getTickets = () => (dispatch, getState) => {
   }
 };
 
+// function singleTicket(uniqueUser) {
+//   console.log('action passed')
+//   return {
+    
+//     type: "UNIQUE_USER",
+//     payload: uniqueUser
+//   };
+// }
+
+// export const getTicket = userParamId => (dispatch, getState) => {
+//   if (!userParamId) {
+//     const state = getState();
+//     userParamId = state.userLogState.id;
+//   }
+//   console.log('action started')
+//   return request
+//     .get(`${baseUrl}/users/${userParamId}`)
+//     .then(response => {
+//       const body = response.body;
+
+//       const uniqueUser = {
+//         id: body.id,
+//         email: body.email,
+//         tickets: body.tickets,
+//         events: body.events,
+//         comments: body.comments
+//       };
+//       console.log(uniqueUser)
+//       const action = singleUser(uniqueUser);
+//       dispatch(action);
+//     })
+//     .catch(console.error);
+// };
+
 function newTicket(newTicketData) {
   return {
     type: "NEW_TICKET",

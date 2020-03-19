@@ -28,7 +28,10 @@ class AllEvents extends Component {
         );
         return (
           <div key={event.id}>
-            <EventCard user={eventAuthor} event={event} />
+            <EventCard
+              user={eventAuthor == null ? { email: null } : eventAuthor}
+              event={event}
+            />
           </div>
         );
       });

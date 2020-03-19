@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getComments } from "../store/actions/comment";
+import { getCommentsForTicket } from "../store/actions/comment";
 import { getUsers } from "../store/actions/users";
 import CommentCard from "./CommentCard";
 import CommentForm from "./CommentForm";
@@ -10,7 +10,7 @@ class CommentContainer extends Component {
     load: true
   };
   async componentWillMount() {
-    await this.props.getComments();
+    await this.props.getCommentsForTicket(this.props.ticket.id);
     await this.props.getUsers();
     this.setState({ load: false });
   }
@@ -57,9 +57,10 @@ class CommentContainer extends Component {
 function mapStateToProps(state) {
   return {
     tickets: state.ticket.all,
-    users: state.users.all
+    users: state.users.all,
+    comments: state.comment.all
   };
 }
-const mapDispatchToProps = { getComments, getUsers };
+const mapDispatchToProps = { getCommentsForTicket, getUsers };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentContainer);

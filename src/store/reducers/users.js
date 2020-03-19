@@ -35,6 +35,20 @@ export default function(state = initialState, action = {}) {
         uniqueUser: { ...state.uniqueUser, tickets: ticketsUpdated }
       };
     }
+    case "CHANGE_EVENT": {
+      const eventsUpdated = state.uniqueUser.events.map(event => {
+        const condition = event.id === action.payload.id;
+
+        if (condition) {
+          return action.payload;
+        }
+        return event;
+      });
+      return {
+        ...state,
+        uniqueUser: { ...state.uniqueUser, events: eventsUpdated }
+      };
+    }
     case "TICKET_DELETE_SUCCESS": {
       const ticketId = action.payload;
       const allMinusDeleted = state.uniqueUser.tickets.filter(
@@ -43,6 +57,16 @@ export default function(state = initialState, action = {}) {
       return {
         ...state,
         uniqueUser: { ...state.uniqueUser, tickets: allMinusDeleted }
+      };
+    }
+    case "EVENT_DELETE_SUCCESS": {
+      const eventId = action.payload;
+      const allMinusDeleted = state.uniqueUser.events.filter(
+        event => event.id !== eventId
+      );
+      return {
+        ...state,
+        uniqueUser: { ...state.uniqueUser, events: allMinusDeleted }
       };
     }
     default:

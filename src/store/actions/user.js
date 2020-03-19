@@ -63,9 +63,10 @@ function createUser(email) {
           id: body.id,
           email: body.email,
           tickets: body.tickets,
-          events: body.events
+          events: body.events,
+          comments: body.comments
         };
-        console.log(uniqueUser)
+        console.log(`UNIQUA`, uniqueUser)
         const action = singleUser(uniqueUser);
         dispatch(action);
       })

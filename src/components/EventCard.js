@@ -9,11 +9,12 @@ class EventCard extends Component {
     load: true
   };
   async componentDidMount() {
+    console.log(`my props in eventcard`, this.props.user);
     await this.props.getTickets();
     this.setState({ load: false });
   }
   render() {
-    // console.log(`my props in eventcard`, this.props);
+
     const now = new Date();
     const updated = new Date(this.props.event.updatedAt);
     const hours = Math.abs(now - updated) / 36e5;

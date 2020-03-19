@@ -15,9 +15,7 @@ export default class CommentForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.dispatch(
-      postComment(this.state.comment, this.state.email, this.props.ticketId)
-    );
+    this.props.dispatch(postComment());
   };
 
   render() {
@@ -29,7 +27,7 @@ export default class CommentForm extends Component {
             Email
             <input
               type="text"
-              name='email'
+              name="email"
               value={this.state.email}
               onChange={this.handleChange}
             />
@@ -37,7 +35,7 @@ export default class CommentForm extends Component {
           <label>
             Comment
             <textarea
-            name='comment'
+              name="comment"
               value={this.state.comment}
               onChange={this.handleChange}
             />
@@ -48,4 +46,3 @@ export default class CommentForm extends Component {
     );
   }
 }
-

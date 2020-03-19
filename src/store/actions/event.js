@@ -8,6 +8,26 @@ function allEvents(eventData) {
     payload: eventData
   };
 }
+
+function eventTickets(ticketData) {
+  return {
+    type: "EVENT_TICKETS",
+    payload: ticketData
+  };
+}
+export const getTicketsForEvent = eventParamId => (dispatch, getState) => {
+  const state = getState();
+  if (!state.ticket.all.length) {
+    request
+      .get(`${baseUrl}/event/${eventParamId}/ticket`)
+      .then(response => {
+        const action = eventTickets(response.body.tickets);
+        dispatch(action);
+      })
+      .catch(console.error);
+  }
+};
+
 export const getEvents = () => (dispatch, getState) => {
   const state = getState();
   const { event } = state;
@@ -22,6 +42,7 @@ export const getEvents = () => (dispatch, getState) => {
       .catch(console.error);
   }
 };
+
 
 function newEvent(newEventData) {
   return {
