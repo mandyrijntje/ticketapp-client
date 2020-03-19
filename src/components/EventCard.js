@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AllTickets from "./AllTickets";
-import { getTickets } from "../store/actions/ticket";
+import { getTicketsForEvent } from "../store/actions/event";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -9,7 +9,7 @@ class EventCard extends Component {
     load: true
   };
   async componentDidMount() {
-    await this.props.getTickets();
+    await this.props.getTicketsForEvent(this.props.event.id);
     this.setState({ load: false });
   }
   render() {
@@ -41,7 +41,7 @@ class EventCard extends Component {
             {this.props.event.startDate} to {this.props.event.endDate}{" "}
           </h3>
           <img src={this.props.event.picture} alt="" className="mr-3" />
-          <p className="text-center"> {this.props.event.description} € </p>
+          <p className="text-center"> {this.props.event.description} </p>
           <p> Uploaded {Math.round(hours)} hours ago</p>
           <div>
             <h3 className="text-center"> Tickets Available</h3>
@@ -59,6 +59,6 @@ function mapStateToProps(state) {
     tickets: state.ticket.all
   };
 }
-const mapDispatchToProps = { getTickets };
+const mapDispatchToProps = { getTicketsForEvent };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventCard);

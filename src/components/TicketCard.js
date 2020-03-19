@@ -46,6 +46,8 @@ class TicketCard extends Component {
   };
 
   render() {
+    console.log(`TICKETCARD USER`,this.props.user)
+
     const now = new Date();
     const updated = new Date(this.props.ticket.updatedAt);
     const hours = Math.abs(now - updated) / 36e5;

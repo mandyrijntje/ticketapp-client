@@ -8,7 +8,7 @@ class AllEvents extends Component {
   state = {
     load: true
   };
-  async componentDidMount() {
+  async componentWillMount() {
     await this.props.getUsers();
     await this.props.getEvents();
     this.setState({ load: false });
@@ -16,7 +16,6 @@ class AllEvents extends Component {
   }
  
   render() {
-    console.log(`ALLEVENTS USER`,this.props.users)
     
     if (this.state.load === false) {
       return this.props.events.map(event => {
