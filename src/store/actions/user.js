@@ -40,7 +40,6 @@ function createUser(email) {
   };
 
   function singleUser(uniqueUser) {
-    console.log('action passed')
     return {
       
       type: "UNIQUE_USER",
@@ -53,7 +52,6 @@ function createUser(email) {
       const state = getState();
       userParamId = state.userLogState.id;
     }
-    console.log('action started')
     return request
       .get(`${baseUrl}/users/${userParamId}`)
       .then(response => {
@@ -66,7 +64,6 @@ function createUser(email) {
           events: body.events,
           comments: body.comments
         };
-        console.log(`UNIQUA`, uniqueUser)
         const action = singleUser(uniqueUser);
         dispatch(action);
       })

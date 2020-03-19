@@ -1,4 +1,4 @@
-const initialState = { all: [] };
+const initialState = { all: [], userTickets:[] };
 
 export default function(state = initialState, action = {}) {
   switch (action.type) {
@@ -12,6 +12,12 @@ export default function(state = initialState, action = {}) {
       return {
         ...state,
         all: [action.payload, ...state.all]
+      };
+    }
+    case "USER_TICKETS": {
+      return {
+        ...state,
+        userTickets: action.payload
       };
     }
     default:

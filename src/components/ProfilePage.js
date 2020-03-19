@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 
 class ProfilePage extends Component {
   componentDidMount() {
-    console.log("WHat");
     if (this.props.userLogState.jwt) {
       this.props.getUser(this.props.userLogState.id);
     }
@@ -39,7 +38,6 @@ class ProfilePage extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
 
   return {
     userTickets: state.users.uniqueUser.tickets,

@@ -9,28 +9,22 @@ class CommentContainer extends Component {
   state = {
     load: true
   };
-  async componentWillMount() {
+  async componentDidMount() {
     await this.props.getCommentsForTicket(this.props.ticket.id);
     await this.props.getUsers();
     this.setState({ load: false });
   }
 
   render() {
-    console.log(`params in comment`, this.props.match.params);
-    const ticketIdMatch = parseInt(this.props.match.params.id);
-    const ticketMatch = this.props.tickets.find(
-      ticket => ticket.id === ticketIdMatch
-    );
-
     const filteredComments = this.props.comments.filter(
-      comment => comment.ticketId === ticketIdMatch
+      comment => comment.ticketId === this.props.ticket.id
     );
-    if (this.state.load === false && ticketMatch) {
+    if (this.state.load === false && this.props.ticket.id) {
       return (
         <div>
           <h1>Comments</h1>
           {filteredComments.length === 0
-            ? "No comments yet. Be the first.yy"
+            ? "No comments yet. Be the first."
             : filteredComments.map(comment => {
                 const commentAuthorId = comment.userId;
                 const commentAuthor = this.props.users.find(
@@ -46,7 +40,7 @@ class CommentContainer extends Component {
                 );
               })}
 
-          <CommentForm ticketId={ticketIdMatch} />
+          <CommentForm ticketId={this.props.ticket.id} />
         </div>
       );
     }

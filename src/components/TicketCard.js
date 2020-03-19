@@ -2,11 +2,18 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import CommentContainer from "./CommentContainer";
 import { getCommentsForTicket } from "../store/actions/comment";
+import { getTicketsForUser } from "../store/actions/ticket";
+import { getTicketsForEvent } from "../store/actions/event";
 
 class TicketCard extends Component {
+  state = {
+    load: true
+  };
   async componentDidMount() {
     await this.props.getCommentsForTicket(this.props.ticket.id);
     await this.props.getTicketsForEvent(this.props.ticket.eventId);
+    await this.props.getTicketsForUser(this.props.user.id);
+    this.setState({ load: false });
   }
 
   riskCalculator = () => {
@@ -18,7 +25,7 @@ class TicketCard extends Component {
     if (this.props.ticketsForUser.length === 1) {
       risk += 10;
     }
-    this.props.ticketsForEvent.map(ticket => {
+    this.props.ticketsForEvent.forEach(ticket => {
       averageTicketPrice = averageTicketPrice + ticket.price;
     });
     averageTicketPrice = averageTicketPrice / this.props.ticketsForEvent.length;
@@ -42,11 +49,7 @@ class TicketCard extends Component {
     const now = new Date();
     const updated = new Date(this.props.ticket.updatedAt);
     const hours = Math.abs(now - updated) / 36e5;
-
-    // const ticketAuthorId = this.props.ticket.userId
-    // const ticketAuthor = this.props.users.find(user=>user.id===ticketAuthorId)
-    // const ticketAuthorName = ticketAuthor.email
-    console.log(`my props in ticketcard`, this.props);
+    if (this.state.load === false){
     return (
       <div className="col-lg-4 col-md-6 col-12" key={this.props.ticket.id}>
         <h1 className="text-center"> Ticket from {this.props.user.email}</h1>
@@ -60,17 +63,21 @@ class TicketCard extends Component {
           <CommentContainer ticket={this.props.ticket} />
         </div>
       </div>
-    );
+    )}return <p>Loading...</p>
   }
 }
 
 function mapStateToProps(state) {
   return {
-    ticketsForEvents: state.event.uniqueEvent,
+    ticketsForEvent: state.event.uniqueEvent,
     commentsForTicket: state.comment.all,
-    ticketsForUser: state.users.uniqueUser.tickets
+    ticketsForUser: state.ticket.userTickets
   };
 }
-const mapDispatchToProps = { getCommentsForTicket };
+const mapDispatchToProps = {
+  getCommentsForTicket,
+  getTicketsForUser,
+  getTicketsForEvent
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TicketCard);

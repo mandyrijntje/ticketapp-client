@@ -9,12 +9,11 @@ class EventCard extends Component {
     load: true
   };
   async componentDidMount() {
-    console.log(`my props in eventcard`, this.props.user);
     await this.props.getTickets();
     this.setState({ load: false });
   }
   render() {
-
+    console.log(`EVENTCARD USER`,this.props.user)
     const now = new Date();
     const updated = new Date(this.props.event.updatedAt);
     const hours = Math.abs(now - updated) / 36e5;
@@ -46,7 +45,7 @@ class EventCard extends Component {
           <p> Uploaded {Math.round(hours)} hours ago</p>
           <div>
             <h3 className="text-center"> Tickets Available</h3>
-            <AllTickets users={this.props.users} tickets={this.props.tickets} />
+            <AllTickets user={this.props.user} tickets={this.props.tickets} />
           </div>
         </div>
       );
@@ -56,9 +55,7 @@ class EventCard extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(`hello again`, state.ticket.all);
   return {
-    users: state.users.all,
     tickets: state.ticket.all
   };
 }

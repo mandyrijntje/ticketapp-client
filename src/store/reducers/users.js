@@ -15,7 +15,6 @@ export default function(state = initialState, action = {}) {
       };
     }
     case "UNIQUE_USER": {
-        console.log("reducer")
       return {
         ...state,
         uniqueUser: action.payload

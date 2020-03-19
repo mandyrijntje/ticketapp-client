@@ -12,26 +12,22 @@ class AllEvents extends Component {
     await this.props.getUsers();
     await this.props.getEvents();
     this.setState({ load: false });
-    // console.log(`eeeeeeeee`, this.props.users.all);
+   
   }
-  // componentDidMount() {
-  //   console.log(`kuxrx`, this.props.users.all);
-  // }
+ 
   render() {
-    // console.log(`my props in allevents`, this.props);
+    console.log(`ALLEVENTS USER`,this.props.users)
+    
     if (this.state.load === false) {
       return this.props.events.map(event => {
         const eventAuthorId = event.userId;
-        console.log(`hello`, this.props.users);
+
         const eventAuthor = this.props.users.find(
           user => user.id === eventAuthorId
         );
         return (
           <div key={event.id}>
-            <EventCard
-              user={eventAuthor == null ? { email: null } : eventAuthor}
-              event={event}
-            />
+            <EventCard user={eventAuthor} event={event} />
           </div>
         );
       });
@@ -41,7 +37,6 @@ class AllEvents extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(`hello again`, state.users.all);
   return {
     users: state.users.all,
     events: state.event.all

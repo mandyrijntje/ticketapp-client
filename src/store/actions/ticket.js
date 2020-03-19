@@ -22,39 +22,27 @@ export const getTickets = () => (dispatch, getState) => {
   }
 };
 
-// function singleTicket(uniqueUser) {
-//   console.log('action passed')
-//   return {
-    
-//     type: "UNIQUE_USER",
-//     payload: uniqueUser
-//   };
-// }
+function userTickets(ticketData) {
+    return {
+      
+      type: "USER_TICKETS",
+      payload: ticketData
+    };
+  }
 
-// export const getTicket = userParamId => (dispatch, getState) => {
-//   if (!userParamId) {
-//     const state = getState();
-//     userParamId = state.userLogState.id;
-//   }
-//   console.log('action started')
-//   return request
-//     .get(`${baseUrl}/users/${userParamId}`)
-//     .then(response => {
-//       const body = response.body;
+export const getTicketsForUser = userParamId => (dispatch, getState) => {
+  const state = getState();
+  if (!state.ticket.userTickets.length) {
+    request
+      .get(`${baseUrl}/users/${userParamId}/ticket`)
+      .then(response => {
+        const action = userTickets(response.body.tickets);
+        dispatch(action);
+      })
+      .catch(console.error);
+  }
+};
 
-//       const uniqueUser = {
-//         id: body.id,
-//         email: body.email,
-//         tickets: body.tickets,
-//         events: body.events,
-//         comments: body.comments
-//       };
-//       console.log(uniqueUser)
-//       const action = singleUser(uniqueUser);
-//       dispatch(action);
-//     })
-//     .catch(console.error);
-// };
 
 function newTicket(newTicketData) {
   return {
@@ -64,7 +52,6 @@ function newTicket(newTicketData) {
 }
 
 export const createTicket = data => (dispatch, getState) => {
-    console.log(data)
   const state = getState();
 
   const { userLogState } = state;

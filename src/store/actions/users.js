@@ -12,13 +12,11 @@ function getallUsers(userData) {
 export const getUsers = () => (dispatch, getState) => {
   const state = getState();
   const { users } = state;
-  console.log(users);
   if (!users.all.length) {
     request
       .get(`${baseUrl}/users`)
       .then(response => {
         const action = getallUsers(response.body);
-        console.log("GetAllUsers is working", response.body);
         dispatch(action);
       })
       .catch(console.error);

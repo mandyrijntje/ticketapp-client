@@ -17,7 +17,7 @@ function eventTickets(ticketData) {
 }
 export const getTicketsForEvent = eventParamId => (dispatch, getState) => {
   const state = getState();
-  if (!state.ticket.all.length) {
+  if (!state.event.uniqueEvent.length) {
     request
       .get(`${baseUrl}/event/${eventParamId}/ticket`)
       .then(response => {
@@ -36,7 +36,6 @@ export const getEvents = () => (dispatch, getState) => {
       .get(`${baseUrl}/event`)
       .then(response => {
         const action = allEvents(response.body.events);
-        console.log(`response`, response);
         dispatch(action);
       })
       .catch(console.error);
@@ -52,7 +51,6 @@ function newEvent(newEventData) {
 }
 
 export const createEvent = data => (dispatch, getState) => {
-  console.log(data);
   const state = getState();
 
   const { userLogState } = state;
@@ -107,7 +105,6 @@ export const deleteEvent = id => (dispatch, getState) => {
     .delete(`${baseUrl}/event/${id}`)
     .set("Authorization", `Bearer ${userLogState.jwt}`)
     .then(response => {
-        console.log(response.body)
       dispatch(uniqueEventDelete(id));
     })
     .catch(console.error);
