@@ -8,7 +8,7 @@ class AllEvents extends Component {
   state = {
     load: true
   };
-  async componentWillMount() {
+  async componentDidMount() {
     await this.props.getUsers();
     await this.props.getEvents();
     this.setState({ load: false });

@@ -13,7 +13,7 @@ class EventCard extends Component {
     this.setState({ load: false });
   }
   render() {
-    console.log(`EVENTCARD USER`,this.props.user)
+    console.log(`EVENTCARD USER`, this.props.user, this.props.tickets);
     const now = new Date();
     const updated = new Date(this.props.event.updatedAt);
     const hours = Math.abs(now - updated) / 36e5;
@@ -42,7 +42,7 @@ class EventCard extends Component {
           </h3>
           <img src={this.props.event.picture} alt="" className="mr-3" />
           <p className="text-center"> {this.props.event.description} </p>
-          <p> Uploaded {Math.round(hours)} hours ago</p>
+          <p> Uploaded {Math.round(hours / 24)} days ago</p>
           <div>
             <h3 className="text-center"> Tickets Available</h3>
             <AllTickets user={this.props.user} tickets={this.props.tickets} />
