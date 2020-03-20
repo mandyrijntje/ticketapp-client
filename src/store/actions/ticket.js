@@ -36,7 +36,7 @@ export const getTicketsForUser = userParamId => (dispatch, getState) => {
     request
       .get(`${baseUrl}/users/${userParamId}/ticket`)
       .then(response => {
-        const action = userTickets(response.body.tickets);
+        const action = userTickets(response.body);
         dispatch(action);
       })
       .catch(console.error);

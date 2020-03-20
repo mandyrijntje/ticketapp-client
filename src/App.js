@@ -21,7 +21,7 @@ function App() {
       <Route exact path="/profile" component={ProfilePage}/>
       <Route exact path="/users" component={AllUsersContainer} />
       <Route exact path="/event" component={AllEvents} />
-      <Route exact path="/ticket" component={AllTickets} />
+      <Route exact path="/event/:eventId/ticket" component={AllTickets} />
       <Route exact path="/users/:userId" component={UserPage} />
       <Route exact path="/" component={Homepage} />
     </div>

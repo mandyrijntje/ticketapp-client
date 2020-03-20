@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import CreateTicketFormContainer from "./CreateTicketFormContainer";
 import ProfileTickets from "./ProfileTickets";
 import { getUser } from "../store/actions/user";
+import { getTicketsForUser } from "../store/actions/ticket";
+import { getEventsForUser } from "../store/actions/event";
 import { connect } from "react-redux";
 
 class ProfilePage extends Component {
@@ -30,7 +32,10 @@ class ProfilePage extends Component {
         <CreateTicketFormContainer />
         <div className="row">
           {" "}
-          <ProfileTickets tickets={this.props.userTickets} />
+          <ProfileTickets
+            tickets={this.props.userTickets}
+            events={this.props.userEvents}
+          />
         </div>
       </div>
     );
@@ -38,13 +43,13 @@ class ProfilePage extends Component {
 }
 
 function mapStateToProps(state) {
-
   return {
     userTickets: state.users.uniqueUser.tickets,
+    userEvents: state.users.uniqueUser.events,
     email: state.users.uniqueUser.email,
     userLogState: state.userLogState
   };
 }
-const mapDispatchToProps = { getUser };
+const mapDispatchToProps = { getUser, getTicketsForUser, getEventsForUser };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

@@ -16,14 +16,16 @@ class AllEvents extends Component {
   }
  
   render() {
+    console.log(`ALLEVENTS `, this.props.users, this.props.events);
     
     if (this.state.load === false) {
       return this.props.events.map(event => {
         const eventAuthorId = event.userId;
-
         const eventAuthor = this.props.users.find(
           user => user.id === eventAuthorId
         );
+        console.log(`eventauthor`, eventAuthor)
+        
         return (
           <div key={event.id}>
             <EventCard user={eventAuthor} event={event} />

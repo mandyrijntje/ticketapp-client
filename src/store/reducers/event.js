@@ -15,6 +15,7 @@ export default function(state = initialState, action = {}) {
       };
     }
     case "EVENT_TICKETS": {
+      console.log(`hello event ticks`)
       return {
         ...state,
         eventTickets: action.payload
