@@ -2,12 +2,27 @@ import request from "superagent";
 
 const baseUrl = "http://localhost:4000";
 
-function allEvents(eventData) {
+
+function userEvents(eventData) {
   return {
-    type: "ALL_EVENTS",
+    
+    type: "USER_EVENTS",
     payload: eventData
   };
 }
+
+export const getEventsForUser = userParamId => (dispatch, getState) => {
+const state = getState();
+if (!state.event.userEvents.length) {
+  request
+    .get(`${baseUrl}/users/${userParamId}/event`)
+    .then(response => {
+      const action = userEvents(response.body.events);
+      dispatch(action);
+    })
+    .catch(console.error);
+}
+};
 
 function eventTickets(ticketData) {
   return {
@@ -17,7 +32,7 @@ function eventTickets(ticketData) {
 }
 export const getTicketsForEvent = eventParamId => (dispatch, getState) => {
   const state = getState();
-  if (!state.event.uniqueEvent.length) {
+  if (!state.event.eventTickets.length) {
     request
       .get(`${baseUrl}/event/${eventParamId}/ticket`)
       .then(response => {
@@ -28,6 +43,13 @@ export const getTicketsForEvent = eventParamId => (dispatch, getState) => {
       .catch(console.error);
   }
 };
+
+function allEvents(eventData) {
+  return {
+    type: "ALL_EVENTS",
+    payload: eventData
+  };
+}
 
 export const getEvents = () => (dispatch, getState) => {
   const state = getState();

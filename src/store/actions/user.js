@@ -16,7 +16,7 @@ export const login = (email, password, history) => dispatch => {
     .then(response => {
       const action = logUserIn(response.body);
       dispatch(action);
-    }).then(() => history.push("/profile"))
+    }).then(() => history.push("/"))
     .catch(console.error);
 };
 

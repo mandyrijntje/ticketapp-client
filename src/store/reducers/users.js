@@ -8,6 +8,12 @@ export default function(state = initialState, action = {}) {
         all: action.payload
       };
     }
+    case "JWT": {
+      return {
+        ...state,
+        all: [action.payload, ...state.all]
+      };
+    }
     case "CREATE_USER": {
       return {
         ...state,

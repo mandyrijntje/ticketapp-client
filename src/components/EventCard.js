@@ -25,12 +25,12 @@ class EventCard extends Component {
             {" "}
             Created by:{" "}
             <Link
-                to={{
-                  pathname: `/users/${this.props.user.id}`
-                }}
-              >
-                {this.props.user.email}
-              </Link>
+              to={{
+                pathname: `/users/${this.props.user.id}`
+              }}
+            >
+              {this.props.user.email}
+            </Link>
           </h3>
           <h3 className="text-center">
             {" "}

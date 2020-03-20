@@ -16,34 +16,34 @@ class TicketCard extends Component {
     this.setState({ load: false });
   }
 
-  // riskCalculator = () => {
-  //   let risk = 0;
-  //   let averageTicketPrice = 0;
-  //   const { ticket } = this.props;
-  //   const parseDate = new Date(ticket.createdAt);
+  riskCalculator = () => {
+    let risk = 0;
+    let averageTicketPrice = 0;
+    const { ticket } = this.props;
+    const parseDate = new Date(ticket.createdAt);
 
-  //   if (this.props.ticketsForUser.length === 1) {
-  //     risk += 10;
-  //   }
-  //   this.props.ticketsForEvent.forEach(ticket => {
-  //     averageTicketPrice = averageTicketPrice + ticket.price;
-  //   });
-  //   averageTicketPrice = averageTicketPrice / this.props.ticketsForEvent.length;
-  //   if (ticket.price > averageTicketPrice) {
-  //     risk += ((ticket.price - averageTicketPrice) / averageTicketPrice) * 100;
-  //   } else {
-  //     risk -= ((ticket.price - averageTicketPrice) / averageTicketPrice) * 100;
-  //   }
-  //   if (parseDate.getHours() < 9 || parseDate.getHours() > 17) {
-  //     risk += 10;
-  //   } else {
-  //     risk -= 10;
-  //   }
-  //   if (this.props.commentsForTicket.length > 3) {
-  //     risk += 5;
-  //   }
-  //   return risk > 5 ? (risk > 95 ? 95 : risk) : 5;
-  // };
+    if (this.props.ticketsForUser.length === 1) {
+      risk += 10;
+    }
+    this.props.ticketsForEvent.forEach(ticket => {
+      averageTicketPrice = averageTicketPrice + ticket.price;
+    });
+    averageTicketPrice = averageTicketPrice / this.props.ticketsForEvent.length;
+    if (ticket.price > averageTicketPrice) {
+      risk += ((ticket.price - averageTicketPrice) / averageTicketPrice) * 100;
+    } else {
+      risk -= ((ticket.price - averageTicketPrice) / averageTicketPrice) * 100;
+    }
+    if (parseDate.getHours() < 9 || parseDate.getHours() > 17) {
+      risk += 10;
+    } else {
+      risk -= 10;
+    }
+    if (this.props.commentsForTicket.length > 3) {
+      risk += 5;
+    }
+    return risk > 5 ? (risk > 95 ? 95 : risk) : 5;
+  };
 
   render() {
     console.log(`TICKETCARD USER`,this.props.user)
@@ -57,7 +57,7 @@ class TicketCard extends Component {
     return (
       <div className="col-lg-4 col-md-6 col-12" key={this.props.ticket.id}>
         <h1 className="text-center"> Ticket from {this.props.user.email}</h1>
-        {/* <h3 className="text-center"> Risk: {this.riskCalculator()} %</h3> */}
+        <h3 className="text-center"> Risk: {this.riskCalculator()} %</h3>
         <h3 className="text-center"> Price: {this.props.ticket.price} € </h3>
         <img src={this.props.ticket.picture} alt="" className="mr-3" />
         <p className="text-center"> {this.props.ticket.description} € </p>
@@ -73,7 +73,7 @@ class TicketCard extends Component {
 
 function mapStateToProps(state) {
   return {
-    ticketsForEvent: state.event.uniqueEvent,
+    ticketsForEvent: state.event.eventTickets,
     commentsForTicket: state.comment.all,
     ticketsForUser: state.ticket.userTickets
   };
