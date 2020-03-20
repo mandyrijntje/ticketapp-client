@@ -16,7 +16,7 @@ class AllEvents extends Component {
   }
  
   render() {
-    console.log(`ALLEVENTS `, this.props.users, this.props.events);
+    // console.log(`ALLEVENTS `, this.props.users, this.props.events);
     
     if (this.state.load === false) {
       return this.props.events.map(event => {
@@ -24,7 +24,7 @@ class AllEvents extends Component {
         const eventAuthor = this.props.users.find(
           user => user.id === eventAuthorId
         );
-        console.log(`eventauthor`, eventAuthor)
+        // console.log(`eventauthor`, eventAuthor)
         
         return (
           <div key={event.id}>

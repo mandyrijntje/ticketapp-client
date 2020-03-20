@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CreateTicketFormContainer from "./CreateTicketFormContainer";
 import ProfileTickets from "./ProfileTickets";
+import ProfileEvents from "./ProfileEvents";
 import { getUser } from "../store/actions/user";
 import { getTicketsForUser } from "../store/actions/ticket";
 import { getEventsForUser } from "../store/actions/event";
@@ -33,6 +34,12 @@ class ProfilePage extends Component {
         <div className="row">
           {" "}
           <ProfileTickets
+            user={this.props.user}
+            tickets={this.props.userTickets}
+            events={this.props.userEvents}
+          />{" "}
+          <ProfileEvents
+            user={this.props.user}
             tickets={this.props.userTickets}
             events={this.props.userEvents}
           />
@@ -44,6 +51,7 @@ class ProfilePage extends Component {
 
 function mapStateToProps(state) {
   return {
+    user: state.users.uniqueUser,
     userTickets: state.users.uniqueUser.tickets,
     userEvents: state.users.uniqueUser.events,
     email: state.users.uniqueUser.email,

@@ -6,16 +6,16 @@ import { Link } from "react-router-dom";
 
 class EventCard extends Component {
   async componentDidMount() {
-    console.log(`event id`, this.props.event.id);
+    // console.log(`event id`, this.props.event.id);
     await this.props.getTicketsForEvent(this.props.event.id);
   }
   render() {
-    console.log(
-      `EVENTCARD USER`,
-      this.props.user,
-      this.props.tickets,
-      this.props
-    );
+    // console.log(
+    //   `EVENTCARD USER`,
+    //   this.props.user,
+    //   this.props.tickets,
+    //   this.props
+    // );
     const now = new Date();
     const updated = new Date(this.props.event.updatedAt);
     const hours = Math.abs(now - updated) / 36e5;

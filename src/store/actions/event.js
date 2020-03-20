@@ -36,7 +36,7 @@ export const getTicketsForEvent = eventParamId => (dispatch, getState) => {
     request
       .get(`${baseUrl}/event/${eventParamId}/ticket`)
       .then(response => {
-        console.log(`GET TICKETS`, response.body);
+        // console.log(`GET TICKETS`, response.body);
         const action = eventTickets(response.body);
         dispatch(action);
       })

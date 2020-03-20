@@ -21,7 +21,7 @@ class ProfileTickets extends Component {
 
       return (
         <div key={ticket.id}>
-          <TicketCard ticket={ticket} />
+          <TicketCard user={this.props.user} ticket={ticket} />
          <div>
            <button
             className="btn btn-dark"

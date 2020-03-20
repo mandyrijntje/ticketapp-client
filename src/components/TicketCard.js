@@ -7,7 +7,7 @@ import { getTicketsForEvent } from "../store/actions/event";
 
 class TicketCard extends Component {
   async componentDidMount() {
-    console.log(`TICKET CARD ticketid`, this.props.ticket.id);
+    // console.log(`TICKET CARD ticketid`, this.props.ticket.id);
     await this.props.getCommentsForTicket(this.props.ticket.id);
     await this.props.getTicketsForEvent(this.props.ticket.eventId);
     await this.props.getTicketsForUser(this.props.user.id);
@@ -43,7 +43,7 @@ class TicketCard extends Component {
   };
 
   render() {
-    console.log(`TICKETCARD USER`, this.props.user);
+    // console.log(`TICKETCARD USER`, this.props.user);
     console.log(
       `RISK`,
       this.props.ticketsForUser,
@@ -58,7 +58,7 @@ class TicketCard extends Component {
     return (
       <div className="col-lg-4 col-md-6 col-12" key={this.props.ticket.id}>
         <h3 className="text-center"> Ticket from {this.props.user.email}</h3>
-        <h6 className="text-center"> Risk: {this.riskCalculator()} %</h6>
+        <h6 className="text-center"> Risk: {Math.round(this.riskCalculator())} %</h6>
         <h6 className="text-center"> Price: {this.props.ticket.price} € </h6>
         <img src={this.props.ticket.picture} alt="" className="mr-3" />
         <p className="text-center"> {this.props.ticket.description} € </p>

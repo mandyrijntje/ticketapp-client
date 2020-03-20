@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default class AllTickets extends Component {
   render() {
-    console.log(`ALLTICKETS USER`, this.props.user, this.props.tickets);
+    // console.log(`ALLTICKETS USER`, this.props.user, this.props.tickets);
     const displayTickets = this.props.tickets.map(ticket => {
       return (
         <div>

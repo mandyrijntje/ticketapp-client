@@ -16,7 +16,7 @@ class CommentContainer extends Component {
   }
 
   render() {
-    console.log(`comment container props`, this.props.comments)
+    // console.log(`comment container props`, this.props.comments)
     const filteredComments = this.props.comments.filter(
       comment => comment.ticketId === this.props.ticket.id
     );
