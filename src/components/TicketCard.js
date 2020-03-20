@@ -58,10 +58,13 @@ class TicketCard extends Component {
     return (
       <div className="col-lg-4 col-md-6 col-12" key={this.props.ticket.id}>
         <h3 className="text-center"> Ticket from {this.props.user.email}</h3>
-        <h6 className="text-center"> Risk: {Math.round(this.riskCalculator())} %</h6>
+        <h6 className="text-center">
+          {" "}
+          Risk: {Math.round(this.riskCalculator())} %
+        </h6>
         <h6 className="text-center"> Price: {this.props.ticket.price} € </h6>
         <img src={this.props.ticket.picture} alt="" className="mr-3" />
-        <p className="text-center"> {this.props.ticket.description} € </p>
+        <p className="text-center"> {this.props.ticket.description} </p>
         <p> Uploaded {Math.round(hours)} hours ago</p>
         <div>
           <h6 className="text-center"> Comments</h6>

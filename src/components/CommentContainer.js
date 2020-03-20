@@ -23,7 +23,6 @@ class CommentContainer extends Component {
     // if (this.state.load === false && this.props.ticket.id) {
     return (
       <div>
-        <h1>Comments</h1>
         {filteredComments.length === 0
           ? "No comments yet. Be the first."
           : filteredComments.map(comment => {
