@@ -2,26 +2,24 @@ import request from "superagent";
 
 const baseUrl = "http://localhost:4000";
 
-
 function userEvents(eventData) {
   return {
-    
     type: "USER_EVENTS",
     payload: eventData
   };
 }
 
 export const getEventsForUser = userParamId => (dispatch, getState) => {
-const state = getState();
-if (!state.event.userEvents.length) {
-  request
-    .get(`${baseUrl}/users/${userParamId}/event`)
-    .then(response => {
-      const action = userEvents(response.body.events);
-      dispatch(action);
-    })
-    .catch(console.error);
-}
+  const state = getState();
+  if (!state.event.userEvents.length) {
+    request
+      .get(`${baseUrl}/users/${userParamId}/event`)
+      .then(response => {
+        const action = userEvents(response.body.events);
+        dispatch(action);
+      })
+      .catch(console.error);
+  }
 };
 
 function eventTickets(ticketData) {
@@ -72,19 +70,19 @@ function newEvent(newEventData) {
   };
 }
 
-export const createEvent = data => (dispatch, getState) => {
+export const createEvent = (data, history) => (dispatch, getState) => {
   const state = getState();
 
   const { userLogState } = state;
-
+  const userId = userLogState.id;
   return request
-    .post(`${baseUrl}/event`)
+    .post(`${baseUrl}/users/${userId}/event`)
     .set("Authorization", `Bearer ${userLogState.jwt}`)
     .send({ ...data, userId: userLogState.id })
     .then(response => {
       const action = newEvent(response.body);
       dispatch(action);
-    })
+    }).then(() => history.push("/profile"))
     .catch(console.error);
 };
 

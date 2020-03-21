@@ -2,7 +2,7 @@ import React from "react";
 import LoginForm from "./LoginForm";
 import { connect } from "react-redux";
 import { login } from "../store/actions/user";
-import { withRouter } from 'react-router'; 
+import { withRouter } from "react-router";
 
 class LoginFormContainer extends React.Component {
   state = { email: "", password: "" };
@@ -25,4 +25,4 @@ class LoginFormContainer extends React.Component {
     );
   }
 }
-export default withRouter(connect(null, { login })(LoginFormContainer))
+export default withRouter(connect(null, { login })(LoginFormContainer));

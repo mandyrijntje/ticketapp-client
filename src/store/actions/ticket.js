@@ -23,12 +23,11 @@ export const getTickets = () => (dispatch, getState) => {
 };
 
 function userTickets(ticketData) {
-    return {
-      
-      type: "USER_TICKETS",
-      payload: ticketData
-    };
-  }
+  return {
+    type: "USER_TICKETS",
+    payload: ticketData
+  };
+}
 
 export const getTicketsForUser = userParamId => (dispatch, getState) => {
   const state = getState();
@@ -43,7 +42,6 @@ export const getTicketsForUser = userParamId => (dispatch, getState) => {
   }
 };
 
-
 function newTicket(newTicketData) {
   return {
     type: "NEW_TICKET",
@@ -51,19 +49,20 @@ function newTicket(newTicketData) {
   };
 }
 
-export const createTicket = data => (dispatch, getState) => {
+export const createTicket = (data, eventParamId, history) => (dispatch, getState) => {
   const state = getState();
-
   const { userLogState } = state;
+  const userId = userLogState.id;
 
   return request
-    .post(`${baseUrl}/ticket`)
+    .post(`${baseUrl}/user/${userId}/event/${eventParamId}/ticket`)
     .set("Authorization", `Bearer ${userLogState.jwt}`)
-    .send({ ...data, userId: userLogState.id })
+    .send({ ...data, userId: userLogState.id, eventParamId: eventParamId })
     .then(response => {
       const action = newTicket(response.body);
       dispatch(action);
     })
+    .then(() => history.push("/profile"))
     .catch(console.error);
 };
 

@@ -12,12 +12,6 @@ export default class AllTickets extends Component {
             key={ticket.id}
             to={`event/${this.props.event.id}/ticket/${ticket.id}`}
           >
-            <button
-              type="button"
-              className="list-group-item list-group-item-action"
-            >
-              {ticket.price}
-            </button>
             {<TicketCard user={this.props.user} ticket={ticket} />}
           </Link>
         </div>

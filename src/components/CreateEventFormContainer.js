@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router";
 import { createEvent } from "../store/actions/event";
 import EventForm from "./EventForm";
 import { getUser } from "../store/actions/user";
@@ -20,7 +21,9 @@ class CreateEventFormContainer extends React.Component {
   };
   onSubmit = event => {
     event.preventDefault();
-    this.props.createEvent(this.state).then(() => this.props.getUser());
+    this.props
+      .createEvent(this.state, this.props.history)
+      .then(() => this.props.getUser());
     this.setState({
       name: "",
       description: "",
@@ -42,6 +45,6 @@ class CreateEventFormContainer extends React.Component {
     );
   }
 }
-export default connect(null, { createEvent, getUser })(
-  CreateEventFormContainer
+export default withRouter(
+  connect(null, { createEvent, getUser })(CreateEventFormContainer)
 );

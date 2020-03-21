@@ -1,10 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router";
 import { createTicket } from "../store/actions/ticket";
 import TicketForm from "./TicketForm";
 import { getUser } from "../store/actions/user";
+import { getEvents } from "../store/actions/event";
 
 class CreateTicketFormContainer extends React.Component {
+  async componentDidMount() {
+    // const 
+    await this.props.getEvents()
+    // await this.props.createTicket(this.state, this.props.history, )
+    // await this.props.events.map(event => this.props.createTicket(this.state, this.props.history, event.id));
+  }
+
   state = {
     picture: "",
     price: "",
@@ -18,7 +27,9 @@ class CreateTicketFormContainer extends React.Component {
   };
   onSubmit = event => {
     event.preventDefault();
-    this.props.createTicket(this.state).then(() => this.props.getUser());
+    this.props
+      .createTicket(this.state, this.props.history)
+      .then(() => this.props.getUser());
     this.setState({
       picture: "",
       price: "",
@@ -33,11 +44,20 @@ class CreateTicketFormContainer extends React.Component {
           onSubmit={this.onSubmit}
           onChange={this.onChange}
           values={this.state}
+          events={this.props.events}
         />
       </div>
     );
   }
 }
-export default connect(null, { createTicket, getUser })(
-  CreateTicketFormContainer
+
+function mapStateToProps(state) {
+  return {
+    events: state.event.all
+  };
+}
+const mapDispatchToProps = { createTicket, getEvents, getUser };
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(CreateTicketFormContainer)
 );

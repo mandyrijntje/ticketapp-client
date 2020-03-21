@@ -20,24 +20,29 @@ class TicketCard extends Component {
     const parseDate = new Date(ticket.createdAt);
 
     if (this.props.ticketsForUser.length === 1) {
-      risk += 10;
+      risk = risk + 10;
     }
     this.props.ticketsForEvent.forEach(ticket => {
       averageTicketPrice = averageTicketPrice + ticket.price;
     });
-    averageTicketPrice = averageTicketPrice / this.props.ticketsForEvent.length;
+    averageTicketPrice =
+      (averageTicketPrice - ticket.price) /
+      (this.props.ticketsForEvent.length - 1);
     if (ticket.price > averageTicketPrice) {
-      risk += ((ticket.price - averageTicketPrice) / averageTicketPrice) * 100;
+      risk =
+        risk + ((ticket.price - averageTicketPrice) / averageTicketPrice) * 100;
     } else {
-      risk -= ((ticket.price - averageTicketPrice) / averageTicketPrice) * 100;
+      risk =
+        risk - ((ticket.price - averageTicketPrice) / averageTicketPrice) * 100;
     }
+    //max 10% deduction
     if (parseDate.getHours() < 9 || parseDate.getHours() > 17) {
-      risk += 10;
+      risk = risk + 10;
     } else {
-      risk -= 10;
+      risk = risk - 10;
     }
     if (this.props.commentsForTicket.length > 3) {
-      risk += 5;
+      risk = risk + 5;
     }
     return risk > 5 ? (risk > 95 ? 95 : risk) : 5;
   };
@@ -60,7 +65,8 @@ class TicketCard extends Component {
         <h3 className="text-center"> Ticket from {this.props.user.email}</h3>
         <h6 className="text-center">
           {" "}
-          Risk: {Math.round(this.riskCalculator())} %
+          We calculated that the risk of this ticket being a fraud is:{" "}
+          {Math.round(this.riskCalculator())} %
         </h6>
         <h6 className="text-center"> Price: {this.props.ticket.price} € </h6>
         <img src={this.props.ticket.picture} alt="" className="mr-3" />

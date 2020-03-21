@@ -18,7 +18,8 @@ class AllEvents extends Component {
     // console.log(`ALLEVENTS `, this.props.users, this.props.events);
 
     if (this.state.load === false) {
-      return this.props.events.map(event => {
+      const eventsCopy = [...this.props.events]
+      return eventsCopy.map(event => {
         const eventAuthorId = event.userId;
         const eventAuthor = this.props.users.find(
           user => user.id === eventAuthorId
