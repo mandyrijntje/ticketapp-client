@@ -6,6 +6,7 @@ export default class TicketForm extends Component {
     const options = this.props.events.map(event => {
       return { value: event.id, label: event.name };
     });
+    const name = this.props.events.map(event => event.id);
     console.log(options);
     return (
       <form onSubmit={this.props.onSubmit}>
@@ -39,7 +40,12 @@ export default class TicketForm extends Component {
             value={this.props.values.description}
           />
         </div>
-        <Select placeholder="Select an event" options={options} />
+        <Select
+          placeholder="Select an event"
+          name={name}
+          options={options}
+          onChange={this.props.onSelect}
+        />
         <button type="submit" className="btn btn-dark">
           Save
         </button>

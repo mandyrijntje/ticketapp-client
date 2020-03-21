@@ -50,6 +50,7 @@ class CommentContainer extends Component {
 
 function mapStateToProps(state) {
   return {
+    userLogState: state.userLogState,
     // tickets: state.ticket.all,
     users: state.users.all
     // comments: state.comment.all
@@ -58,3 +59,4 @@ function mapStateToProps(state) {
 const mapDispatchToProps = { getCommentsForTicket, getUsers };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentContainer);
+
