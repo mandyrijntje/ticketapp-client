@@ -7,8 +7,11 @@ export default class AllTickets extends Component {
     // console.log(`ALLTICKETS USER`, this.props.user, this.props.tickets);
     const displayTickets = this.props.tickets.map(ticket => {
       return (
-        <div>
-          <Link key={ticket.id} to={`/ticket/${ticket.id}`}>
+        <div key={ticket.id}>
+          <Link
+            key={ticket.id}
+            to={`event/${this.props.event.id}/ticket/${ticket.id}`}
+          >
             <button
               type="button"
               className="list-group-item list-group-item-action"

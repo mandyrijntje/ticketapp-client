@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import CreateTicketFormContainer from "./CreateTicketFormContainer";
+import CreateEventFormContainer from "./CreateEventFormContainer";
 import ProfileTickets from "./ProfileTickets";
 import ProfileEvents from "./ProfileEvents";
 import { getUser } from "../store/actions/user";
@@ -16,36 +17,70 @@ class ProfilePage extends Component {
 
   render() {
     if (!this.props.userLogState.jwt) {
-      return <p>Login to access your imageboard</p>;
-    }
-
-    if (!this.props.userTickets) {
+      return <p>Login to access this honey!</p>;
+    } else if (!this.props.userTickets && !this.props.userEvents) {
       return (
         <div>
+          <p>Welcome {this.props.email}!</p>
           <p>{this.props.email}</p>
           <CreateTicketFormContainer />
+          <CreateEventFormContainer />
+        </div>
+      );
+    } else if (this.props.userTickets && !this.props.userEvents) {
+      return (
+        <div>
+          <p>Welcome {this.props.email}!</p>
+          <CreateTicketFormContainer />
+          <CreateEventFormContainer />
+          <div className="row">
+            {" "}
+            <ProfileTickets
+              user={this.props.user}
+              tickets={this.props.userTickets}
+              events={this.props.userEvents}
+            />
+          </div>
+        </div>
+      );
+    } else if (!this.props.userTickets && this.props.userEvents) {
+      return (
+        <div>
+          <p>Welcome {this.props.email}!</p>
+          <CreateTicketFormContainer />
+          <CreateEventFormContainer />
+          <div className="row">
+            {" "}
+            <ProfileEvents
+              user={this.props.user}
+              tickets={this.props.userTickets}
+              events={this.props.userEvents}
+            />
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <p>Welcome {this.props.email}!</p>
+          <CreateTicketFormContainer />
+          <CreateEventFormContainer />
+          <div className="row">
+            {" "}
+            <ProfileTickets
+              user={this.props.user}
+              tickets={this.props.userTickets}
+              events={this.props.userEvents}
+            />{" "}
+            <ProfileEvents
+              user={this.props.user}
+              tickets={this.props.userTickets}
+              events={this.props.userEvents}
+            />
+          </div>
         </div>
       );
     }
-    return (
-      <div>
-        <p>Welcome {this.props.email}</p>
-        <CreateTicketFormContainer />
-        <div className="row">
-          {" "}
-          <ProfileTickets
-            user={this.props.user}
-            tickets={this.props.userTickets}
-            events={this.props.userEvents}
-          />{" "}
-          <ProfileEvents
-            user={this.props.user}
-            tickets={this.props.userTickets}
-            events={this.props.userEvents}
-          />
-        </div>
-      </div>
-    );
   }
 }
 

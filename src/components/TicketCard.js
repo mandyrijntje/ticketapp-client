@@ -44,12 +44,12 @@ class TicketCard extends Component {
 
   render() {
     // console.log(`TICKETCARD USER`, this.props.user);
-    console.log(
-      `RISK`,
-      this.props.ticketsForUser,
-      this.props.commentsForTicket,
-      this.props.ticketsForEvent
-    );
+    // console.log(
+    //   `RISK`,
+    //   this.props.ticketsForUser,
+    //   this.props.commentsForTicket,
+    //   this.props.ticketsForEvent
+    // );
 
     const now = new Date();
     const updated = new Date(this.props.ticket.updatedAt);

@@ -12,12 +12,11 @@ class AllEvents extends Component {
     await this.props.getUsers();
     await this.props.getEvents();
     this.setState({ load: false });
-   
   }
- 
+
   render() {
     // console.log(`ALLEVENTS `, this.props.users, this.props.events);
-    
+
     if (this.state.load === false) {
       return this.props.events.map(event => {
         const eventAuthorId = event.userId;
@@ -25,7 +24,7 @@ class AllEvents extends Component {
           user => user.id === eventAuthorId
         );
         // console.log(`eventauthor`, eventAuthor)
-        
+
         return (
           <div key={event.id}>
             <EventCard user={eventAuthor} event={event} />

@@ -22,7 +22,11 @@ class EventCard extends Component {
 
     return (
       <div className="col-lg-4 col-md-6 col-12" key={this.props.event.id}>
-        <h1 className="text-center">{this.props.event.name}</h1>
+        <h1 className="text-center">
+          <Link to={`/event/${this.props.event.id}`}>
+            {this.props.event.name}
+          </Link>
+        </h1>
         <h3 className="text-center">
           {" "}
           Created by:{" "}
@@ -39,7 +43,11 @@ class EventCard extends Component {
         <p> Uploaded {Math.round(hours / 24)} days ago</p>
         <div>
           <h3 className="text-center"> Tickets Available</h3>
-          <AllTickets user={this.props.user} tickets={this.props.tickets} />
+          <AllTickets
+            user={this.props.user}
+            tickets={this.props.tickets}
+            event={this.props.event}
+          />
         </div>
       </div>
     );

@@ -8,7 +8,7 @@ class CreateTicketFormContainer extends React.Component {
   state = {
     picture: "",
     price: "",
-    description:""
+    description: ""
   };
 
   onChange = event => {
@@ -21,14 +21,14 @@ class CreateTicketFormContainer extends React.Component {
     this.props.createTicket(this.state).then(() => this.props.getUser());
     this.setState({
       picture: "",
-    price: "",
-    description:""
+      price: "",
+      description: ""
     });
   };
   render() {
     return (
       <div>
-        <p>Create a ticket, sell it, get rich.</p>
+        <h2>Create a ticket, sell it, get rich.</h2>
         <TicketForm
           onSubmit={this.onSubmit}
           onChange={this.onChange}
@@ -39,5 +39,5 @@ class CreateTicketFormContainer extends React.Component {
   }
 }
 export default connect(null, { createTicket, getUser })(
-    CreateTicketFormContainer
+  CreateTicketFormContainer
 );

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createTicket } from "../store/actions/ticket";
-import TicketForm from "./TicketForm";
+import { createEvent } from "../store/actions/event";
+import EventForm from "./EventForm";
 import { getUser } from "../store/actions/user";
 
 class CreateEventFormContainer extends React.Component {
@@ -32,7 +32,7 @@ class CreateEventFormContainer extends React.Component {
   render() {
     return (
       <div>
-        <p>Make something unforgettable.</p>
+        <h2>Make something unforgettable.</h2>
         <EventForm
           onSubmit={this.onSubmit}
           onChange={this.onChange}
