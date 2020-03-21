@@ -12,7 +12,13 @@ export default class AllTickets extends Component {
             key={ticket.id}
             to={`event/${this.props.event.id}/ticket/${ticket.id}`}
           >
-            {<TicketCard user={this.props.user} ticket={ticket} />}
+            {
+              <TicketCard
+                user={this.props.user}
+                ticket={ticket}
+                id={ticket.id}
+              />
+            }
           </Link>
         </div>
       );

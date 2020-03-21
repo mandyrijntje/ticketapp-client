@@ -5,18 +5,19 @@ import TicketForm from "./TicketForm"
 
 class EditTicketFormContainer extends Component {
   state = {
-    title: "",
-    url: ""
+    picture: "",
+    price: "",
+    description: "",
   };
 
   onSubmit = event => {
     event.preventDefault();
 
     const update = {
-      title: this.state.title,
-      url: this.state.url
-    };
-
+      picture: this.state.picture,
+    price: this.state.price,
+    description: this.state.description,
+    }
     this.props.updateTicket(this.props.id, update);
   };
 

@@ -18,7 +18,7 @@ class CreateTicketFormContainer extends React.Component {
     picture: "",
     price: "",
     description: "",
-    eventParamId: null
+    eventId: null
   };
 
   onChange = event => {
@@ -27,15 +27,15 @@ class CreateTicketFormContainer extends React.Component {
     });
   };
 
-  onSelect = eventParamId => {
-    this.setState({ eventParamId: eventParamId.value });
-    console.log(`Option selected:`, eventParamId.value);
+  onSelect = eventId => {
+    this.setState({ eventId: eventId.value });
+    console.log(`Option selected:`, eventId.value);
   };
 
   onSubmit = event => {
     event.preventDefault();
     this.props
-      .createTicket(this.state, this.state.eventParamId, this.props.history)
+      .createTicket(this.state, this.state.eventId, this.props.history)
       .then(() => this.props.getUser());
     this.setState({
       picture: "",

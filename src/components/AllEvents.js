@@ -18,7 +18,7 @@ class AllEvents extends Component {
     // console.log(`ALLEVENTS `, this.props.users, this.props.events);
 
     if (this.state.load === false) {
-      const eventsCopy = [...this.props.events]
+      const eventsCopy = [...this.props.events];
       return eventsCopy.map(event => {
         const eventAuthorId = event.userId;
         const eventAuthor = this.props.users.find(
@@ -28,7 +28,7 @@ class AllEvents extends Component {
 
         return (
           <div key={event.id}>
-            <EventCard user={eventAuthor} event={event} />
+            <EventCard user={eventAuthor} event={event} id={event.id} />
           </div>
         );
       });

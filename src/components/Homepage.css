@@ -1,14 +1,22 @@
 body {
-    margin: 40px;
-    font-family: "Spartan";
-  }
-  
-  img {
-    max-width: 350px;
-    padding: 20px;
-  }
-  
-  .btn {
-    margin: 5px;
-  }
-  
+  margin: 40px;
+  font-family: "Spartan";
+  background-color:rgb(158, 194, 191);
+}
+
+img {
+  max-width: 350px;
+  padding: 20px;
+}
+
+.btn {
+  margin: 5px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  float: right;
+  margin-top: 25em;
+  color: rgb(14, 102, 117);
+}

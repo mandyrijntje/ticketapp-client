@@ -49,7 +49,7 @@ function newTicket(newTicketData) {
   };
 }
 
-export const createTicket = (data, eventParamId, history) => (
+export const createTicket = (data, eventId, history) => (
   dispatch,
   getState
 ) => {
@@ -60,7 +60,7 @@ export const createTicket = (data, eventParamId, history) => (
   return request
     .post(`${baseUrl}/users/${userId}/ticket`)
     .set("Authorization", `Bearer ${userLogState.jwt}`)
-    .send({ ...data, userId: userLogState.id, eventParamId: eventParamId })
+    .send({ ...data, userId: userLogState.id, eventId: eventId })
     .then(response => {
       console.log(response.body);
       const action = newTicket(response.body);
