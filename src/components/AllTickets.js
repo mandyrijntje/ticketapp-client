@@ -1,24 +1,29 @@
 import React, { Component } from "react";
 import TicketCard from "./TicketCard";
+import { getUsers } from "../store/actions/users";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-export default class AllTickets extends Component {
+class AllTickets extends Component {
+  async componentDidMount() {
+    await this.props.getUsers();
+  }
+
   render() {
     // console.log(`ALLTICKETS USER`, this.props.user, this.props.tickets);
-    const displayTickets = this.props.tickets.map(ticket => {
+    const ticketsCopy = [...this.props.tickets];
+    const displayTickets = ticketsCopy.map(ticket => {
+      const ticketAuthorId = ticket.userId;
+      const ticketAuthor = this.props.users.find(
+        user => user.id === ticketAuthorId
+      );
       return (
         <div key={ticket.id}>
           <Link
             key={ticket.id}
-            to={`event/${this.props.event.id}/ticket/${ticket.id}`}
+            to={`event/${ticket.eventId}/ticket/${ticket.id}`}
           >
-            {
-              <TicketCard
-                user={this.props.user}
-                ticket={ticket}
-                id={ticket.id}
-              />
-            }
+            {<TicketCard user={ticketAuthor} ticket={ticket} id={ticket.id} />}
           </Link>
         </div>
       );
@@ -33,3 +38,11 @@ export default class AllTickets extends Component {
     );
   }
 }
+function mapStateToProps(state) {
+  return {
+    users: state.users.all
+  };
+}
+const mapDispatchToProps = { getUsers };
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllTickets);

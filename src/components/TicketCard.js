@@ -1,16 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import CommentContainer from "./CommentContainer";
+import { getTickets } from "../store/actions/ticket";
 import { getCommentsForTicket } from "../store/actions/comment";
 import { getTicketsForUser } from "../store/actions/ticket";
 import { getTicketsForEvent } from "../store/actions/event";
 
 class TicketCard extends Component {
+  state = {
+    load: true
+  };
   async componentDidMount() {
-    // console.log(`TICKET CARD ticketid`, this.props.ticket.id);
-    await this.props.getCommentsForTicket(this.props.ticket.id);
-    await this.props.getTicketsForEvent(this.props.ticket.eventId);
-    await this.props.getTicketsForUser(this.props.user.id);
+    await getCommentsForTicket(this.props.ticket.id);
+    await getTicketsForUser(this.props.ticket.userId);
+    await getTicketsForEvent(this.props.ticket.eventId);
+    this.setState({ load: false });
   }
 
   riskCalculator = () => {
@@ -28,14 +32,19 @@ class TicketCard extends Component {
     averageTicketPrice =
       (averageTicketPrice - ticket.price) /
       (this.props.ticketsForEvent.length - 1);
-    if (ticket.price > averageTicketPrice) {
+    if (ticket.price < averageTicketPrice) {
       risk =
-        risk + ((ticket.price - averageTicketPrice) / averageTicketPrice) * 100;
+        risk + ((averageTicketPrice - ticket.price) / averageTicketPrice) * 100;
+    } else if (
+      ticket.price > averageTicketPrice &&
+      ((ticket.price - averageTicketPrice) / averageTicketPrice) * 100 > 10
+    ) {
+      risk = risk + 10;
     } else {
       risk =
         risk - ((ticket.price - averageTicketPrice) / averageTicketPrice) * 100;
     }
-    //max 10% deduction
+
     if (parseDate.getHours() < 9 || parseDate.getHours() > 17) {
       risk = risk + 10;
     } else {
@@ -48,9 +57,9 @@ class TicketCard extends Component {
   };
 
   render() {
-    // console.log(`TICKETCARD USER`, this.props.user);
     // console.log(
     //   `RISK`,
+    //   this.props.tickets,
     //   this.props.ticketsForUser,
     //   this.props.commentsForTicket,
     //   this.props.ticketsForEvent
@@ -59,39 +68,39 @@ class TicketCard extends Component {
     const now = new Date();
     const updated = new Date(this.props.ticket.updatedAt);
     const hours = Math.abs(now - updated) / 36e5;
-
-    return (
-      <div className="col-lg-4 col-md-6 col-12" key={this.props.ticket.id}>
-        <h3 className="text-center"> Ticket from {this.props.user.email}</h3>
-        <h6 className="text-center">
-          {" "}
-          We calculated that the risk of this ticket being a fraud is:{" "}
-          {Math.round(this.riskCalculator())} %
-        </h6>
-        <h6 className="text-center"> Price: {this.props.ticket.price} € </h6>
-        <img src={this.props.ticket.picture} alt="" className="mr-3" />
-        <p className="text-center"> {this.props.ticket.description} </p>
-        <p> Uploaded {Math.round(hours)} hours ago</p>
-        <div>
-          <h6 className="text-center"> Comments</h6>
-          <CommentContainer
-            ticket={this.props.ticket}
-            comments={this.props.commentsForTicket}
-          />
+    if (this.state.load === false) {
+      return (
+        <div className="col-lg-4 col-md-6 col-12" key={this.props.ticket.id}>
+          <h3 className="text-center"> Ticket from {this.props.user.email}</h3>
+          <h6 className="text-center">
+            {" "}
+            We calculated that the risk of this ticket being a fraud is:{" "}
+            {Math.round(this.riskCalculator())} %
+          </h6>
+          <h6 className="text-center"> Price: {this.props.ticket.price} € </h6>
+          <img src={this.props.ticket.picture} alt="" className="mr-3" />
+          <p className="text-center"> {this.props.ticket.description} </p>
+          <p> Uploaded {Math.round(hours)} hours ago</p>
+          <div>
+            <h6 className="text-center"> Comments</h6>
+            <CommentContainer ticket={this.props.ticket} />
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+    return <p>Loading...</p>;
   }
 }
 
 function mapStateToProps(state) {
   return {
+    ticketsForUser: state.ticket.userTickets,
     ticketsForEvent: state.event.eventTickets,
-    commentsForTicket: state.comment.all,
-    ticketsForUser: state.ticket.userTickets
+    commentsForTicket: state.comment.ticketComments
   };
 }
 const mapDispatchToProps = {
+  getTickets,
   getCommentsForTicket,
   getTicketsForUser,
   getTicketsForEvent

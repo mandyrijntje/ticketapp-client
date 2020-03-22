@@ -16,6 +16,7 @@ export const getUsers = () => (dispatch, getState) => {
     request
       .get(`${baseUrl}/users`)
       .then(response => {
+        // console.log(`get users working`);
         const action = getallUsers(response.body);
         dispatch(action);
       })

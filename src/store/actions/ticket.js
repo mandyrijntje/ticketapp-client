@@ -15,7 +15,8 @@ export const getTickets = () => (dispatch, getState) => {
     request
       .get(`${baseUrl}/ticket`)
       .then(response => {
-        const action = allTickets(response.body.tickets);
+        // console.log(`get tickets working`)
+        const action = allTickets(response.body);
         dispatch(action);
       })
       .catch(console.error);
@@ -62,7 +63,7 @@ export const createTicket = (data, eventId, history) => (
     .set("Authorization", `Bearer ${userLogState.jwt}`)
     .send({ ...data, userId: userLogState.id, eventId: eventId })
     .then(response => {
-      console.log(response.body);
+      // console.log(response.body);
       const action = newTicket(response.body);
       dispatch(action);
     })

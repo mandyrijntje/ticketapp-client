@@ -43,11 +43,7 @@ class EventCard extends Component {
         <p> Uploaded {Math.round(hours / 24)} days ago</p>
         <div>
           <h3 className="text-center"> Tickets Available</h3>
-          <AllTickets
-            user={this.props.user}
-            tickets={this.props.tickets}
-            event={this.props.event}
-          />
+          <AllTickets tickets={this.props.tickets} event={this.props.event} />
         </div>
       </div>
     );

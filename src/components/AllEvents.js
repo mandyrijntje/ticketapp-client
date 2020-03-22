@@ -19,12 +19,12 @@ class AllEvents extends Component {
 
     if (this.state.load === false) {
       const eventsCopy = [...this.props.events];
-      return eventsCopy.map(event => {
+      const sortedEvents = eventsCopy.sort((a, b) => a.startDate - b.startDate);
+      return sortedEvents.map(event => {
         const eventAuthorId = event.userId;
         const eventAuthor = this.props.users.find(
           user => user.id === eventAuthorId
         );
-        // console.log(`eventauthor`, eventAuthor)
 
         return (
           <div key={event.id}>

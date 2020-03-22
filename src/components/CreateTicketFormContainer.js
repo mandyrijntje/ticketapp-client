@@ -29,7 +29,7 @@ class CreateTicketFormContainer extends React.Component {
 
   onSelect = eventId => {
     this.setState({ eventId: eventId.value });
-    console.log(`Option selected:`, eventId.value);
+    // console.log(`Option selected:`, eventId.value);
   };
 
   onSubmit = event => {

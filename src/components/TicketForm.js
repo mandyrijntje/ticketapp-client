@@ -7,7 +7,7 @@ export default class TicketForm extends Component {
       return { value: event.id, label: event.name };
     });
     const name = this.props.events.map(event => event.id);
-    console.log(options);
+    // console.log(options);
     return (
       <form onSubmit={this.props.onSubmit}>
         <div className="form-group col-sm-12">
