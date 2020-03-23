@@ -35,7 +35,7 @@ export const getCommentsForTicket = ticketId => (dispatch, getState) => {
     request
       .get(`${baseUrl}/ticket/${ticketId}/comment`)
       .then(response => {
-        console.log(`getcomments`, response.body);
+        // console.log(`getcomments`, response.body);
         const action = ticketComments(response.body);
         dispatch(action);
       })
